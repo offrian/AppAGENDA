@@ -1,0 +1,9 @@
+/* ClientScreen.css */
+.Toastify__toast--success {
+    background-color: #4caf50; /* Cor de fundo para notificação de sucesso */
+  }
+  
+  .Toastify__toast--error {
+    background-color: #f44336; /* Cor de fundo para notificação de erro */
+  }
+  

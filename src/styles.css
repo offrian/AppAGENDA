@@ -1,0 +1,429 @@
+/* Reset de Estilos Básicos (opcional) */
+body, h1, h2, p, ul, li, button, input, select, textarea {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo para o fundo da tela inicial */
+  .main-screen {
+    background-color: #f4f4f4;
+    height: 100vh; /* Tornar a tela inicial do tamanho da viewport */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Estilo para o título na tela inicial */
+  .main-screen h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para as opções de cliente e profissional na tela inicial */
+  .user-options {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 800px; /* Largura máxima do conteúdo */
+  }
+  
+  .client-option,
+  .professional-option {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Estilo para os botões na tela inicial */
+  .user-options button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .user-options button:hover {
+    background-color: #0056b3;
+  }
+  
+
+/* Estilo para o fundo da tela do cliente */
+.client-screen {
+    background-color: #f4f4f4;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Estilo para a caixa branca que envolve o formulário */
+.client-form-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Adicione uma sombra à caixa */
+    border-radius: 8px; /* Adicione cantos arredondados */
+}
+
+/* Estilo para o título na tela do cliente */
+.client-screen h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para os campos de entrada no formulário */
+.client-form input[type="date"],
+.client-form input[type="time"],
+.client-form select,
+.client-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px; /* Aumente o espaço entre os campos */
+}
+
+/* Estilo para o botão de agendamento no formulário */
+.client-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.client-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para o fundo da tela do cliente */
+.client-screen {
+    background-color: #f4f4f4;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Estilo para a caixa branca que envolve o formulário */
+.client-form-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+/* Estilo para o título na tela do cliente */
+.client-screen h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333; /* Cor do texto */
+}
+
+/* Estilo para os campos de entrada no formulário */
+.client-form input[type="date"],
+.client-form input[type="time"],
+.client-form select,
+.client-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc; /* Cor da borda */
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Estilo para o botão de agendamento no formulário */
+.client-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+.client-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para os links (por exemplo, para a tela do profissional) */
+.client-form a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.client-form a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para os campos de data e horário */
+.date-time-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Estilo para o campo de seleção (profissional) */
+  .select-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Estilo para o botão de agendamento */
+  .client-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  
+  .client-form button:hover {
+    background-color: #0056b3;
+  }
+
+
+  /* Estilo para a tela do profissional */
+.professional-screen {
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Estilo para a tabela de agendamentos */
+  .professional-screen table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  /* Estilo para as células da tabela */
+  .professional-screen table th,
+  .professional-screen table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* Estilo para o cabeçalho da tabela */
+  .professional-screen table th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Estilo para as células de dados */
+  .professional-screen table td {
+    background-color: #fff;
+  }
+  
+  /* Estilo para o botão voltar */
+  .professional-screen .back-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  
+  .professional-screen .back-button:hover {
+    background-color: #0056b3;
+  }
+  
+/* Estilo para o container do calendário */
+.my-calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 800px; /* Ajuste a largura conforme necessário */
+}
+
+/* Estilo para o título do calendário (mês e ano) */
+.my-calendar .react-calendar__navigation button {
+  background-color: transparent;
+  color: #000000;
+  border: none;
+  font-size: 24px; /* Aumenta o tamanho do mês e ano */
+}
+
+/* Estilo para os eventos no calendário (exemplo) */
+.my-calendar .react-calendar__tile--active {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  padding: 15px; /* Aumenta o tamanho do quadrado dos dias */
+}
+
+.my-calendar .react-calendar__navigation button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilo para as setas de navegação (anterior e próximo) */
+.my-calendar .react-calendar__navigation button:enabled:hover {
+  background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+  border-radius: 50%; /* Arredonda as setas */
+  padding: 5px; /* Aumenta o espaço clicável */
+  transition: background-color 0.3s;
+}
+
+
+/* Estilo simplificado para os dias da semana no cabeçalho do calendário */
+.my-calendar .react-calendar__month-view__weekdays {
+  background-color: transparent; /* Remove o fundo cinza */
+  font-weight: bold; /* Deixa o texto em negrito */
+}
+
+/* Estilo simplificado para os números dos dias no calendário */
+.my-calendar .react-calendar__month-view__days__day {
+  font-size: 20px; /* Aumenta o tamanho do número do dia */
+  padding: 15px; /* Aumenta o tamanho do quadrado dos dias */
+}
+
+/* Estilo para o botão de voltar à tela principal (reutilize o estilo anterior) */
+.my-calendar .back-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.my-calendar .back-button:hover {
+  background-color: #0056b3;
+}
+
+  
+.my-calendar .booked-date {
+  background-color: green;
+  color: white;
+  border-radius: 50%;
+  padding: 8px;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+  /* Estilo para o fundo da tela de login */
+.login-screen {
+  background-color: #f4f4f4;
+  height: 100vh; /* Tornar a tela de login do tamanho da viewport */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Estilo para o título na tela de login */
+.login-screen h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Estilo para o formulário de login */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilo para o botão de login */
+form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para o link de registro */
+.login-screen p {
+  font-size: 16px;
+}
+
+.login-screen p a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-screen p a:hover {
+  text-decoration: underline;
+}
+
+.booked-date {
+  background-color: green; /* ou a cor desejada para datas com um agendamento */
+}
+
+.multi-booked-date {
+  background-color: red; /* ou a cor desejada para datas com mais de um agendamento */
+}
+
