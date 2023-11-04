@@ -11,7 +11,7 @@ import './styles.css';
 const App = () => {
   return (
     <Router>
-      {/* Cada rota tem seu próprio ToastContainer */}
+      {}
       <Switch>
         <Route path="/cliente" component={ClientScreen} />
         <Route path="/profissional" component={ProfessionalScreen} />
@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/" component={MainScreen} />
       </Switch>
 
-      {/* ToastContainer global para notificações */}
+      {}
       <ToastContainer />
     </Router>
   );

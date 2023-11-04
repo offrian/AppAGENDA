@@ -27,10 +27,6 @@ const LoginScreen = () => {
       setLoginSuccess(true);
       showNotification('Login bem-sucedido!', 'success');
     }
-    if (username === 'rian' && password === '1234') {
-      setLoginSuccess(true);
-      showNotification('Login bem-sucedido!', 'success');
-    } 
     else {
       setLoginSuccess(false);
       showNotification('Nome de usuário ou senha incorretos', 'error');
@@ -38,7 +34,7 @@ const LoginScreen = () => {
   };
 
   if (loginSuccess) {
-    history.push('/profissional'); // Redirecionar para a tela de profissional
+    history.push('/profissional');
   }
 
   return (

@@ -26,7 +26,6 @@ const ClientScreen = () => {
   }, [appointments]);
 
   useEffect(() => {
-    // Atualizar horários disponíveis sempre que a data mudar
     updateAvailableTimes(selectedDate);
   }, [selectedDate]);
 
@@ -86,7 +85,7 @@ const ClientScreen = () => {
     }
 
     const novoAgendamento = {
-      id: new Date().toISOString(), // Adicionando um ID único baseado na data e hora atuais
+      id: new Date().toISOString(),
       selectedDate: selectedDateTime,
       selectedProfessional,
       selectedTime,
@@ -151,19 +150,15 @@ const ClientScreen = () => {
   };
 
   const formatPhoneNumber = (input) => {
-    // Limpar todos os caracteres não numéricos do número de telefone
     const cleaned = ('' + input).replace(/\D/g, '');
-    // Verificar se há 11 dígitos (incluindo o DDD) e formatar como (DD) xxxxx-xxxx
     const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
     if (match) {
       return `(${match[1]}) ${match[2]}-${match[3]}`;
     }
-    // Caso contrário, retornar o número não formatado
     return cleaned;
   };
 
   const handlePhoneChange = (e) => {
-    // Formatar o número de telefone enquanto o usuário digita
     const formattedPhone = formatPhoneNumber(e.target.value);
     setClientPhone(formattedPhone);
   };

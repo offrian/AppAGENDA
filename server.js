@@ -13,7 +13,7 @@ const clientAppointments = [];
 const professionalAppointments = [];
 
 app.post('/api/agendamentos-cliente', (req, res) => {
-  const novoAgendamentoCliente = { ...req.body, id: uuidv4() }; // Adiciona um ID único ao novo agendamento
+  const novoAgendamentoCliente = { ...req.body, id: uuidv4() }; 
   clientAppointments.push(novoAgendamentoCliente);
 
   console.log('Agendamentos do cliente atualizados:', clientAppointments);

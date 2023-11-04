@@ -1,15 +1,13 @@
-/* ClientScreen.css */
 .Toastify__toast--success {
-  background-color: #4caf50; /* Cor de fundo para notificação de sucesso */
+  background-color: #4caf50; 
 }
 
 .Toastify__toast--error {
-  background-color: #f44336; /* Cor de fundo para notificação de erro */
+  background-color: #f44336; /
 }
 
-/* Adicione regras de mídia para ajustar as notificações em telas menores */
 @media only screen and (max-width: 600px) {
   .Toastify__toast {
-      width: 80%; /* Ajusta a largura das notificações para 80% em telas menores */
+      width: 80%;
   }
 }

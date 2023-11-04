@@ -1,11 +1,9 @@
-/* Reset de Estilos Básicos (opcional) */
 body, h1, h2, p, ul, li, button, input, select, textarea {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Estilo comum para telas menores */
 .client-screen,
 .professional-screen,
 .login-screen,
@@ -19,7 +17,6 @@ body, h1, h2, p, ul, li, button, input, select, textarea {
   height: 100vh;
 }
 
-/* Títulos comuns */
 .client-screen h1,
 .professional-screen h1,
 .login-screen h1,
@@ -29,7 +26,6 @@ body, h1, h2, p, ul, li, button, input, select, textarea {
   color: #333;
 }
 
-/* Estilo para os campos de entrada no formulário */
 .client-form input[type="date"],
 .client-form input[type="time"],
 .client-form select,
@@ -44,7 +40,6 @@ body, h1, h2, p, ul, li, button, input, select, textarea {
   font-size: 16px;
 }
 
-/* Estilo para os botões */
 .client-form button,
 .user-options button,
 form button {
@@ -59,7 +54,6 @@ form button {
   margin-top: 10px;
 }
 
-/* Estilo para os links */
 .client-form a,
 .login-screen p a {
   color: #007bff;
@@ -67,7 +61,6 @@ form button {
   font-weight: bold;
 }
 
-/* Estilo para os campos de data e horário */
 .date-time-input,
 .select-input {
   width: 100%;
@@ -78,14 +71,12 @@ form button {
   font-size: 16px;
 }
 
-/* Estilo para a tabela de agendamentos */
 .professional-screen table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-/* Estilo para as células da tabela */
 .professional-screen table th,
 .professional-screen table td {
   border: 1px solid #ddd;
@@ -93,7 +84,6 @@ form button {
   text-align: center;
 }
 
-/* Estilo para o botão voltar */
 .professional-screen .back-button,
 .my-calendar .back-button {
   background-color: #007bff;
@@ -107,7 +97,6 @@ form button {
   font-size: 18px;
 }
 
-/* Estilo para as opções de cliente e profissional na tela inicial */
 .user-options {
   display: flex;
   justify-content: space-around;
@@ -126,7 +115,6 @@ form button {
   align-items: center;
 }
 
-/* Estilo para os botões na tela inicial */
 .user-options button:hover,
 .client-form button:hover,
 form button:hover,
@@ -135,7 +123,6 @@ form button:hover,
   background-color: #0056b3;
 }
 
-/* Adicione as regras de mídia aqui */
 @media only screen and (max-width: 600px) {
   .user-options {
       flex-direction: column;
@@ -161,7 +148,6 @@ form button:hover,
   }
 }
 
-/* Container do formulário do cliente */
 .client-form-container {
   background-color: #ffffff;
   border: 1px solid #ddd;
@@ -173,7 +159,6 @@ form button:hover,
   margin-top: 0px;
 }
 
-/* Estilo para os campos de entrada no formulário dentro do container */
 .client-form-container input[type="date"],
 .client-form-container input[type="time"],
 .client-form-container select,
@@ -186,7 +171,6 @@ form button:hover,
   font-size: 16px;
 }
 
-/* Estilo para os botões dentro do container */
 .client-form-container button {
   background-color: #007bff;
   color: #fff;
@@ -203,7 +187,7 @@ form button:hover,
   max-width: auto;
   height: 20%;
   display: block;
-  margin: 0 auto; /* Centraliza horizontalmente */
+  margin: 0 auto; 
 }
 
 .logo2 {
@@ -211,12 +195,12 @@ form button:hover,
 }
 
 .header {
-  text-align: center; /* Centraliza verticalmente */
+  text-align: center; 
   padding: 20px;
-  background-color: #f4f4f4; /* Cor de fundo opcional */
+  background-color: #f4f4f4; 
 }
 
-/* Adicione regras de mídia para ajustar o tamanho do container em telas menores, se necessário */
+
 @media only screen and (max-width: 600px) {
   .client-form-container {
     width: 90%;

@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Adicionado para centralizar verticalmente */
+  justify-content: center; 
 }
 
 h1 {
@@ -17,14 +17,14 @@ h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 20px;
   margin-bottom: 10px;
-  text-align: center; /* Centralizado horizontalmente */
+  text-align: center; 
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
-  margin-top: 20px; /* Adicionado para espaçamento superior */
+  margin-top: 20px; 
 }
 
 th, td {
@@ -94,7 +94,6 @@ th {
   margin-right: 5px;
 }
 
-/* Adicione regras de mídia para ajustar o tamanho dos botões em telas menores */
 @media only screen and (max-width: 600px) {
   .confirm-button,
   .cancel-button,
