@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const MainScreen = () => {
   return (
     <div className="main-screen">
+      <img className="logo" src="logo.png"></img>
       <h1>Bem-vindo</h1>
       <div className="user-options">
         <div className="client-option">

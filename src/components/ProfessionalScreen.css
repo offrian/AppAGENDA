@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Adicionado para centralizar verticalmente */
 }
 
 h1 {
@@ -16,12 +17,14 @@ h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 20px;
   margin-bottom: 10px;
+  text-align: center; /* Centralizado horizontalmente */
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  margin-top: 20px; /* Adicionado para espaçamento superior */
 }
 
 th, td {
@@ -60,10 +63,10 @@ th {
 }
 
 .link-button button {
-  background-color: #4CAF50; /* verde para botão de link */
+  background-color: #4CAF50;
   border: none;
   color: white;
-  padding: 12px 24px; /* Aumentei o padding para um visual mais espaçado */
+  padding: 12px 24px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -78,28 +81,8 @@ th {
   background-color: #45a049;
 }
 
-.confirm-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 5px 15px;
-  cursor: pointer;
-  font-size: 13px;
-  border-radius: 5px;
-  margin-right: 5px;
-}
-
-.cancel-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 5px 15px;
-  cursor: pointer;
-  font-size: 13px;
-  border-radius: 5px;
-  margin-right: 5px;
-}
-
+.confirm-button,
+.cancel-button,
 .delete-button {
   background-color: #007bff;
   color: #fff;
@@ -108,4 +91,25 @@ th {
   cursor: pointer;
   font-size: 13px;
   border-radius: 5px;
+  margin-right: 5px;
+}
+
+/* Adicione regras de mídia para ajustar o tamanho dos botões em telas menores */
+@media only screen and (max-width: 600px) {
+  .confirm-button,
+  .cancel-button,
+  .delete-button {
+    font-size: 12px;
+    padding: 4px 10px;
+    margin-right: 3px;
+    margin-top: 5px;
+  }
+  
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 10px 5px;
+  }
 }

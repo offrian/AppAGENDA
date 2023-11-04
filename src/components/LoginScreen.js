@@ -26,7 +26,12 @@ const LoginScreen = () => {
     if (username === 'admin' && password === 'admin') {
       setLoginSuccess(true);
       showNotification('Login bem-sucedido!', 'success');
-    } else {
+    }
+    if (username === 'rian' && password === '1234') {
+      setLoginSuccess(true);
+      showNotification('Login bem-sucedido!', 'success');
+    } 
+    else {
       setLoginSuccess(false);
       showNotification('Nome de usuário ou senha incorretos', 'error');
     }
@@ -39,7 +44,7 @@ const LoginScreen = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h1>Tela de Login</h1>
+      <img className="logo2" src="logo.png"></img>
         <div>
           <label>Nome de Usuário:</label>
           <input

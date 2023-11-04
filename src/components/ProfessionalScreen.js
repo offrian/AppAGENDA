@@ -7,7 +7,6 @@ const ProfessionalScreen = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    // Carrega os agendamentos apenas uma vez no carregamento inicial
     if (appointments.length === 0) {
       axios.get('http://localhost:3005/api/agendamentos-cliente')
         .then((response) => {
@@ -42,10 +41,7 @@ const ProfessionalScreen = () => {
 
   const handleDeleteAppointment = async (id, confirmed, date, time) => {
     try {
-      // Lógica para excluir o agendamento (pode ser uma chamada de API)
       await axios.delete(`http://localhost:3005/api/agendamentos-cliente/${id}`);
-      
-      // Atualiza o estado excluindo o agendamento correspondente
       setAppointments(prevAppointments => 
         prevAppointments.filter(appointment => 
           !(appointment.id === id &&
@@ -57,7 +53,6 @@ const ProfessionalScreen = () => {
     } catch (error) {
       console.error('Erro ao excluir agendamento:', error);
   
-      // Se o erro é do tipo AxiosError, imprime os detalhes da resposta
       if (axios.isAxiosError(error) && error.response) {
         console.error('Detalhes da resposta:', error.response.data);
       }
@@ -69,7 +64,7 @@ const ProfessionalScreen = () => {
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,300&display=swap');
       </style>
-      <h1>Tela do Profissional</h1>
+      <img className="logo" src="logo.png"></img>
       <div>
         <h2>Agendamentos</h2>
         <table>
@@ -79,7 +74,6 @@ const ProfessionalScreen = () => {
               <th>Horário</th>
               <th>Nome do Cliente</th>
               <th>Número de Celular</th>
-              <th>Informações adicionais</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -97,7 +91,6 @@ const ProfessionalScreen = () => {
                     {appointment.clientPhone}
                   </span>
                 </td>
-                <td>{appointment.additionalInfo}</td>
                 <td>
                   {!appointment.confirmed && (
                     <button className="confirm-button" onClick={() => handleConfirmAppointment(appointment)}>Confirmar</button>
@@ -111,9 +104,7 @@ const ProfessionalScreen = () => {
             ))}
           </tbody>
         </table>
-        &nbsp;
       </div>
-      &nbsp;
       <div className="user-options">
         <Link to="/">
           <button>Voltar</button>

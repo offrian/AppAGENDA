@@ -170,7 +170,7 @@ const ClientScreen = () => {
 
   return (
     <div className="client-screen">
-      <h1>Agendamentos</h1>
+      <img className="logo" src="logo.png"></img>
       <div className="client-form-container">
         <h2>Agendar um horário:</h2>
         &nbsp;
@@ -217,20 +217,10 @@ const ClientScreen = () => {
             ))}
           </select>
         </div>
-        <div>
-          <label>Informações adicionais:</label>
-          <textarea
-            rows="4"
-            cols="50"
-            value={additionalInfo}
-            onChange={(e) => setAdditionalInfo(e.target.value)}
-          ></textarea>
-        </div>
         <div className="user-options">
           <button onClick={handleAppointmentSubmit}>Agendar</button>
         </div>
       </div>
-      &nbsp;
       <div className="user-options">
         <Link to="/">
           <button>Voltar</button>
