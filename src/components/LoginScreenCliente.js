@@ -23,7 +23,7 @@ const LoginScreen = () => {
   };
 
   const handleLogin = () => {
-    if (username === 'admin' && password === 'admin') {
+    if (username === 'cliente' && password === 'cliente') {
       setLoginSuccess(true);
       showNotification('Login bem-sucedido!', 'success');
     } else {
@@ -37,7 +37,7 @@ const LoginScreen = () => {
   };
 
   if (loginSuccess) {
-    history.push('/profissional');
+    history.push('/cliente');
   }
 
   return (

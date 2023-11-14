@@ -51,3 +51,18 @@ app.delete('/api/agendamentos-cliente/:id', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+app.put('/api/agendamentos-cliente/:id', (req, res) => {
+  const { id } = req.params;
+  const updatedAppointment = req.body;
+
+  const index = clientAppointments.findIndex(appointment => appointment.id === id);
+
+  if (index !== -1) {
+    clientAppointments[index] = { ...updatedAppointment, id };
+    console.log('Agendamento do cliente atualizado:', clientAppointments[index]);
+    res.status(200).json({ message: 'Agendamento do cliente atualizado com sucesso!' });
+  } else {
+    res.status(404).json({ error: 'Agendamento do cliente não encontrado.' });
+  }
+});

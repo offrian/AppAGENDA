@@ -13,6 +13,7 @@ const ClientScreen = () => {
   const [clientPhone, setClientPhone] = useState('');
   const [appointments, setAppointments] = useState([]);
   const [availableTimes, setAvailableTimes] = useState([]);
+  const [isNotRobot, setIsNotRobot] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:3005/api/agendamentos-cliente')
@@ -78,6 +79,11 @@ const ClientScreen = () => {
   };
 
   const handleAppointmentSubmit = () => {
+    if (!isNotRobot) {
+      showNotification('Por favor, confirme que você não é um robô.', 'error');
+      return;
+    }
+
     const selectedDateTime = new Date(selectedDate + 'T' + selectedTime + ':00');
 
     if (!isTimeSlotAvailable(selectedDateTime, selectedTime)) {
@@ -165,7 +171,7 @@ const ClientScreen = () => {
 
   return (
     <div className="client-screen">
-      <img className="logo" src="logo.png"></img>
+      <img className="logo" src="logo.png" alt="Logo"></img>
       <div className="client-form-container">
         <h2>Agendar um horário:</h2>
         &nbsp;
@@ -212,8 +218,18 @@ const ClientScreen = () => {
             ))}
           </select>
         </div>
+        <div className="robot-checkbox-container">
+          <label>
+            <input
+              type="checkbox"
+              checked={isNotRobot}
+              onChange={() => setIsNotRobot(!isNotRobot)}
+            />
+            &nbsp; Eu não sou um robô
+          </label>
+        </div>
         <div className="user-options">
-          <button onClick={handleAppointmentSubmit}>Agendar</button>
+          <button disabled={!isNotRobot} onClick={handleAppointmentSubmit}>Agendar</button>
         </div>
       </div>
       <div className="user-options">

@@ -5,6 +5,9 @@ import './ProfessionalScreen.css';
 
 const ProfessionalScreen = () => {
   const [appointments, setAppointments] = useState([]);
+  const [editingAppointment, setEditingAppointment] = useState(null);
+  const [newDate, setNewDate] = useState('');
+  const [newTime, setNewTime] = useState('');
 
   useEffect(() => {
     if (appointments.length === 0) {
@@ -42,16 +45,48 @@ const ProfessionalScreen = () => {
   const handleDeleteAppointment = async (id, confirmed, date, time) => {
     try {
       await axios.delete(`http://localhost:3005/api/agendamentos-cliente/${id}`);
-      setAppointments(prevAppointments => 
-        prevAppointments.filter(appointment => 
-          !(appointment.id === id &&
-            appointment.confirmed === confirmed &&
-            appointment.selectedDate === date &&
-            appointment.selectedTime === time)
+      setAppointments((prevAppointments) =>
+        prevAppointments.filter(
+          (appointment) =>
+            !(appointment.id === id && appointment.confirmed === confirmed && appointment.selectedDate === date && appointment.selectedTime === time)
         )
       );
     } catch (error) {
       console.error('Erro ao excluir agendamento:', error);
+
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('Detalhes da resposta:', error.response.data);
+      }
+    }
+  };
+
+  const handleEditAppointment = (appointment) => {
+    setEditingAppointment(appointment);
+    setNewDate(formatDate(appointment.selectedDate));
+    setNewTime(appointment.selectedTime);
+  };
+
+  const handleSaveEdit = async () => {
+    try {
+      const updatedAppointment = {
+        ...editingAppointment,
+        selectedDate: new Date(newDate + 'T' + newTime + ':00').toISOString(),
+        selectedTime: newTime,
+      };
+  
+      await axios.put(`http://localhost:3005/api/agendamentos-cliente/${editingAppointment.id}`, updatedAppointment);
+  
+      setAppointments((prevAppointments) =>
+        prevAppointments.map((appointment) =>
+          appointment.id === updatedAppointment.id ? updatedAppointment : appointment
+        )
+      );
+  
+      setEditingAppointment(null);
+      setNewDate('');
+      setNewTime('');
+    } catch (error) {
+      console.error('Erro ao salvar edição:', error);
   
       if (axios.isAxiosError(error) && error.response) {
         console.error('Detalhes da resposta:', error.response.data);
@@ -59,12 +94,18 @@ const ProfessionalScreen = () => {
     }
   };
 
+  const handleCancelEdit = () => {
+    setEditingAppointment(null);
+    setNewDate('');
+    setNewTime('');
+  };
+
   return (
     <div className="professional-screen">
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,300&display=swap');
       </style>
-      <img className="logo" src="logo.png"></img>
+      <img className="logo" src="logo.png" alt="Logo" />
       <div>
         <h2>Agendamentos</h2>
         <table>
@@ -84,7 +125,7 @@ const ProfessionalScreen = () => {
                 <td>{appointment.selectedTime}</td>
                 <td>{appointment.clientName}</td>
                 <td>
-                  <span 
+                  <span
                     className="whatsapp-link"
                     onClick={() => openWhatsApp(appointment.clientPhone, `Olá, ${appointment.clientName}!`)}
                   >
@@ -93,17 +134,55 @@ const ProfessionalScreen = () => {
                 </td>
                 <td>
                   {!appointment.confirmed && (
-                    <button className="confirm-button" onClick={() => handleConfirmAppointment(appointment)}>Confirmar</button>
+                    <>
+                      <button className="confirm-button" onClick={() => handleConfirmAppointment(appointment)}>
+                        Confirmar
+                      </button>
+                      <button className="cancel-button" onClick={() => handleCancelAppointment(appointment)}>
+                        Cancelar
+                      </button>
+                    </>
                   )}
+                  <button className="delete-button" onClick={() => handleDeleteAppointment(appointment.id, appointment.confirmed, appointment.selectedDate, appointment.selectedTime)}>
+                    Excluir
+                  </button>
                   {!appointment.confirmed && (
-                    <button className="cancel-button" onClick={() => handleCancelAppointment(appointment)}>Cancelar</button>
+                    <button className="confirm-button" onClick={() => handleEditAppointment(appointment)}>
+                      Editar
+                    </button>
                   )}
-                  <button className="delete-button" onClick={() => handleDeleteAppointment(appointment.id, appointment.confirmed, appointment.selectedDate, appointment.selectedTime)}>Excluir</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        {editingAppointment && (
+          <div className="edit-appointment-modal">
+            <div className="modal-content">
+              <h3>Editar Agendamento</h3>
+              <div>
+                <label>Data:</label>
+                <input
+                  type="date"
+                  value={newDate}
+                  onChange={(e) => setNewDate(e.target.value)}
+                />
+              </div>
+              <div>
+                <label>Horário:</label>
+                <input
+                  type="time"
+                  value={newTime}
+                  onChange={(e) => setNewTime(e.target.value)}
+                />
+              </div>
+              <div className="edit-buttons">
+                <button onClick={handleSaveEdit}>Salvar</button>
+                <button onClick={handleCancelEdit}>Cancelar</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <div className="user-options">
         <Link to="/">
