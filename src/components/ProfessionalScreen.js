@@ -8,6 +8,8 @@ const ProfessionalScreen = () => {
   const [editingAppointment, setEditingAppointment] = useState(null);
   const [newDate, setNewDate] = useState('');
   const [newTime, setNewTime] = useState('');
+  const [deletedAppointments, setDeletedAppointments] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
     if (appointments.length === 0) {
@@ -21,6 +23,11 @@ const ProfessionalScreen = () => {
         });
     }
   }, [appointments]);
+
+  useEffect(() => {
+    const storedDeletedAppointments = JSON.parse(localStorage.getItem('deletedAppointments')) || [];
+    setDeletedAppointments(storedDeletedAppointments);
+  }, []);
 
   const formatDate = (date) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -42,7 +49,7 @@ const ProfessionalScreen = () => {
     openWhatsApp(appointment.clientPhone, cancellationMessage);
   };
 
-  const handleDeleteAppointment = async (id, confirmed, date, time) => {
+  const handleDeleteAppointment = async (id, confirmed, date, time, clientName) => {
     try {
       await axios.delete(`http://localhost:3005/api/agendamentos-cliente/${id}`);
       setAppointments((prevAppointments) =>
@@ -51,6 +58,16 @@ const ProfessionalScreen = () => {
             !(appointment.id === id && appointment.confirmed === confirmed && appointment.selectedDate === date && appointment.selectedTime === time)
         )
       );
+
+      // Adiciona o agendamento excluído ao histórico
+      const updatedDeletedAppointments = [
+        ...deletedAppointments,
+        { id, confirmed, selectedDate: date, selectedTime: time, clientName },
+      ];
+      setDeletedAppointments(updatedDeletedAppointments);
+
+      // Atualiza o armazenamento local do histórico
+      localStorage.setItem('deletedAppointments', JSON.stringify(updatedDeletedAppointments));
     } catch (error) {
       console.error('Erro ao excluir agendamento:', error);
 
@@ -73,21 +90,21 @@ const ProfessionalScreen = () => {
         selectedDate: new Date(newDate + 'T' + newTime + ':00').toISOString(),
         selectedTime: newTime,
       };
-  
+
       await axios.put(`http://localhost:3005/api/agendamentos-cliente/${editingAppointment.id}`, updatedAppointment);
-  
+
       setAppointments((prevAppointments) =>
-        prevAppointments.map((appointment) =>
-          appointment.id === updatedAppointment.id ? updatedAppointment : appointment
+        prevAppointments.map((prevAppointment) =>
+          prevAppointment.id === updatedAppointment.id ? updatedAppointment : prevAppointment
         )
       );
-  
+
       setEditingAppointment(null);
       setNewDate('');
       setNewTime('');
     } catch (error) {
       console.error('Erro ao salvar edição:', error);
-  
+
       if (axios.isAxiosError(error) && error.response) {
         console.error('Detalhes da resposta:', error.response.data);
       }
@@ -100,14 +117,22 @@ const ProfessionalScreen = () => {
     setNewTime('');
   };
 
+  // Função para exibir ou ocultar o histórico
+  const toggleHistory = () => {
+    setShowHistory(!showHistory);
+  };
+
   return (
     <div className="professional-screen">
       <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,300&display=swap');
+        {`@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,300&display=swap');`}
       </style>
       <img className="logo" src="logo.png" alt="Logo" />
       <div>
         <h2>Agendamentos</h2>
+        <button className="history-button" onClick={toggleHistory}>
+          {showHistory ? 'Voltar' : 'Histórico'}
+        </button>
         <table>
           <thead>
             <tr>
@@ -143,7 +168,7 @@ const ProfessionalScreen = () => {
                       </button>
                     </>
                   )}
-                  <button className="delete-button" onClick={() => handleDeleteAppointment(appointment.id, appointment.confirmed, appointment.selectedDate, appointment.selectedTime)}>
+                  <button className="delete-button" onClick={() => handleDeleteAppointment(appointment.id, appointment.confirmed, appointment.selectedDate, appointment.selectedTime, appointment.clientName)}>
                     Excluir
                   </button>
                   {!appointment.confirmed && (
@@ -156,6 +181,23 @@ const ProfessionalScreen = () => {
             ))}
           </tbody>
         </table>
+        {showHistory && (
+          <div className="history-modal">
+            <div className="modal-content">
+              <h3>Histórico de Agendamentos</h3>
+              <ul>
+                {deletedAppointments.map((appointment) => (
+                  <li key={appointment.id}>
+                    <strong>Nome Cliente:</strong> {appointment.clientName}{' '}
+                    <strong>Data:</strong> {formatDate(appointment.selectedDate)}{' '}
+                    <strong>Horário:</strong> {appointment.selectedTime}
+                  </li>
+                ))}
+              </ul>
+              <button className="confirm-button" onClick={toggleHistory}>Voltar</button>
+            </div>
+          </div>
+        )}
         {editingAppointment && (
           <div className="edit-appointment-modal">
             <div className="modal-content">
