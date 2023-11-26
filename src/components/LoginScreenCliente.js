@@ -10,8 +10,12 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
-  const [signupUsername, setSignupUsername] = useState('');
-  const [signupPassword, setSignupPassword] = useState('');
+  const [signupData, setSignupData] = useState({
+    name: '',
+    username: '',
+    password: '',
+    phone: '',
+  });
 
   const history = useHistory();
 
@@ -49,8 +53,10 @@ const LoginScreen = () => {
   const handleSignup = async () => {
     try {
       const response = await axios.post('http://localhost:3005/api/cadastrar-usuario', {
-        username: signupUsername,
-        password: signupPassword,
+        name: signupData.name,
+        username: signupData.username,
+        password: signupData.password,
+        phone: signupData.phone,
       });
 
       if (response.data.message === 'Usuário cadastrado com sucesso!') {
@@ -67,6 +73,13 @@ const LoginScreen = () => {
 
   const handleGoBack = () => {
     history.push('/');
+  };
+
+  const handleInputChange = (field, value) => {
+    setSignupData({
+      ...signupData,
+      [field]: value,
+    });
   };
 
   if (loginSuccess) {
@@ -107,19 +120,35 @@ const LoginScreen = () => {
           <div className="signup-modal-content">
             <h2>Cadastro</h2>
             <div>
+              <label>Nome:</label>
+              <input
+                type="text"
+                value={signupData.name}
+                onChange={(e) => handleInputChange('name', e.target.value)}
+              />
+            </div>
+            <div>
               <label>Nome de Usuário:</label>
               <input
                 type="text"
-                value={signupUsername}
-                onChange={(e) => setSignupUsername(e.target.value)}
+                value={signupData.username}
+                onChange={(e) => handleInputChange('username', e.target.value)}
               />
             </div>
             <div>
               <label>Senha:</label>
               <input
                 type="password"
-                value={signupPassword}
-                onChange={(e) => setSignupPassword(e.target.value)}
+                value={signupData.password}
+                onChange={(e) => handleInputChange('password', e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Número de Celular:</label>
+              <input
+                type="text"
+                value={signupData.phone}
+                onChange={(e) => handleInputChange('phone', e.target.value)}
               />
             </div>
             <div>

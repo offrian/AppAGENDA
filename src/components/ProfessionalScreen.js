@@ -49,7 +49,7 @@ const ProfessionalScreen = () => {
     openWhatsApp(appointment.clientPhone, cancellationMessage);
   };
 
-  const handleDeleteAppointment = async (id, confirmed, date, time, clientName) => {
+  const handleDeleteAppointment = async (id, confirmed, date, time, clientName, clientPhone) => {
     try {
       await axios.delete(`http://localhost:3005/api/agendamentos-cliente/${id}`);
       setAppointments((prevAppointments) =>
@@ -58,19 +58,19 @@ const ProfessionalScreen = () => {
             !(appointment.id === id && appointment.confirmed === confirmed && appointment.selectedDate === date && appointment.selectedTime === time)
         )
       );
-
+  
       // Adiciona o agendamento excluído ao histórico
       const updatedDeletedAppointments = [
         ...deletedAppointments,
-        { id, confirmed, selectedDate: date, selectedTime: time, clientName },
+        { id, confirmed, selectedDate: date, selectedTime: time, clientName, clientPhone },
       ];
       setDeletedAppointments(updatedDeletedAppointments);
-
+  
       // Atualiza o armazenamento local do histórico
       localStorage.setItem('deletedAppointments', JSON.stringify(updatedDeletedAppointments));
     } catch (error) {
       console.error('Erro ao excluir agendamento:', error);
-
+  
       if (axios.isAxiosError(error) && error.response) {
         console.error('Detalhes da resposta:', error.response.data);
       }
@@ -122,17 +122,55 @@ const ProfessionalScreen = () => {
     setShowHistory(!showHistory);
   };
 
+  const handleRecoverAppointment = async (appointment) => {
+    try {
+      const recoveredAppointment = {
+        ...appointment,
+        confirmed: false, // Define como não confirmado ao recuperar
+      };
+
+      await axios.post('http://localhost:3005/api/agendamentos-cliente', recoveredAppointment);
+
+      // Remove o agendamento recuperado do histórico
+      const updatedDeletedAppointments = deletedAppointments.filter(
+        (deleted) => deleted.id !== appointment.id
+      );
+      setDeletedAppointments(updatedDeletedAppointments);
+
+      // Atualiza o armazenamento local do histórico
+      localStorage.setItem('deletedAppointments', JSON.stringify(updatedDeletedAppointments));
+
+      // Adiciona o agendamento recuperado à lista de agendamentos
+      setAppointments((prevAppointments) => [...prevAppointments, recoveredAppointment]);
+    } catch (error) {
+      console.error('Erro ao recuperar agendamento:', error);
+
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('Detalhes da resposta:', error.response.data);
+      }
+    }
+  };
+
+  const handleClearHistory = () => {
+    // Limpa o histórico
+    setDeletedAppointments([]);
+    // Atualiza o armazenamento local do histórico
+    localStorage.removeItem('deletedAppointments');
+  };
+
   return (
     <div className="professional-screen">
-      <style>
-        {`@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,300&display=swap');`}
-      </style>
-      <img className="logo" src="logo.png" alt="Logo" />
+      {/* ... (código anterior) */}
       <div>
         <h2>Agendamentos</h2>
         <button className="history-button" onClick={toggleHistory}>
           {showHistory ? 'Voltar' : 'Histórico'}
         </button>
+        {showHistory && (
+          <button className="clear-history-button" onClick={handleClearHistory}>
+            Limpar Histórico
+          </button>
+        )}
         <table>
           <thead>
             <tr>
@@ -168,7 +206,7 @@ const ProfessionalScreen = () => {
                       </button>
                     </>
                   )}
-                  <button className="delete-button" onClick={() => handleDeleteAppointment(appointment.id, appointment.confirmed, appointment.selectedDate, appointment.selectedTime, appointment.clientName)}>
+                  <button className="delete-button" onClick={() => handleDeleteAppointment(appointment.id, appointment.confirmed, appointment.selectedDate, appointment.selectedTime, appointment.clientName, appointment.clientPhone)}>
                     Excluir
                   </button>
                   {!appointment.confirmed && (
@@ -189,12 +227,25 @@ const ProfessionalScreen = () => {
                 {deletedAppointments.map((appointment) => (
                   <li key={appointment.id}>
                     <strong>Nome Cliente:</strong> {appointment.clientName}{' '}
+                    <strong>Número de Celular:</strong> {appointment.clientPhone}{' '}
                     <strong>Data:</strong> {formatDate(appointment.selectedDate)}{' '}
                     <strong>Horário:</strong> {appointment.selectedTime}
+                    &nbsp;
+                    <button
+                      className="recover-button"
+                      onClick={() => handleRecoverAppointment(appointment)}
+                    >
+                      Recuperar
+                    </button>
                   </li>
                 ))}
               </ul>
               <button className="confirm-button" onClick={toggleHistory}>Voltar</button>
+              {showHistory && (
+                <button className="clear-history-button" onClick={handleClearHistory}>
+                  Limpar Histórico
+                </button>
+              )}
             </div>
           </div>
         )}

@@ -207,3 +207,27 @@ form button:hover,
   }
 }
 
+.recover-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.clear-history-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

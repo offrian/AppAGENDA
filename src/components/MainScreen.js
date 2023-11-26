@@ -10,7 +10,7 @@ const MainScreen = () => {
         <div className="client-option">
           <h2>Cliente</h2>
           <p>Agende um horário com um profissional.</p>
-          <Link to="/login2">
+          <Link to="/cliente">
             <button>Entrar como Cliente</button>
           </Link>
         </div>
